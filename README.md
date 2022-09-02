@@ -18,5 +18,5 @@ You can run an Optimization with the `main.py` file. The code includes the gener
 
 ## Models and Training
 
-The trained models can be found [here](models/saved_models/). To start your own training, use `main_train.py` with your prefered parameters. You may generate your own training data using PyMieScat or ... something about or data that I still have to upload ...
+The trained models can be found [here](models/saved_models/). To start your own training, use `main_train.py` with your prefered parameters. You may generate your own training data using PyMieScat or ... something about our data that I still have to upload ...
 
