@@ -1,6 +1,6 @@
-from model import *
+from models.model import *
 from objective import *
-from losses import *
+from models.losses import *
 import torch
 
 from scipy.optimize import minimize
@@ -121,7 +121,7 @@ if __name__ == "__main__":
     ]
     nlafs = [nlaf_c0s, nlaf_c1s, nlaf_c2s, nlaf_c3s, nlaf_c4s]
 
-    save_model_path = "saved_models/"
+    save_model_path = "models/saved_models/"
     input_dim = [(i + 1) * 2 for i in range(n_shells_max + 1)]
     output_dim = n_points
     models = [

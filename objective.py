@@ -1,8 +1,8 @@
 import torch
 import numpy as np
 from torch.autograd.functional import jacobian
-from losses import *
-from model import LinearNetwork
+from models.losses import *
+from models.model import LinearNetwork
 
 
 class Objective:  ## one objective for single with _n_shells
