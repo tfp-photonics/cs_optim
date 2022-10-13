@@ -3,7 +3,7 @@ import numpy as np
 from torch.autograd.functional import jacobian
 from models.losses import *
 from models.model import LinearNetwork
-
+import sqlite3
 
 class Objective:  ## one objective for single with _n_shells
     def __init__(
@@ -130,21 +130,52 @@ class Objective:  ## one objective for single with _n_shells
 
 class Results:  ## store results
     def __init__(self):
-        self.num_sols = 0
+        self.ids = -1
         self.specs = []
         self.MAEs = []
         self.params = []
+        self.targets = []
 
     def __call__(self, num):
         return self.params[num], self.specs[num], self.MAEs[num]
 
-    def add_result(self, params, spec, MAE):
+    def add_result(self, params, spec, MAE, target):
 
-        self.num_sols += 1
+        self.ids += 1
         self.specs.append(spec)
         self.MAEs.append(MAE)
         self.params.append(params)
+        self.targets.append(target)
 
     def best_result(self):
         best = np.argmin(np.array(self.MAEs))
         return self.__call__(best)
+
+    ### under construction ..
+    ### still needs spectrum in and output? maybe also seeds... mhm not happy
+    '''
+        ich glaube man könnte hier richtig coole relationslogik einbauen. target spectrum mit verschiedenen ids verknüpfen die darauf optimiert sind
+        dann bräuchte man aber sowas wie target id und design id. 
+    '''
+    def save_to_db(self, name = 'db', ids = None):
+        con = sqlite3.connect(f'{name}.sqlite')
+        cur = con.cursor()
+        cur.execute(f'CREATE TABLE IF NOT EXISTS designs (design id INT, core material FLOAT, s1 material FLOAT, s2 material FLOAT, s3 material FLOAT,  s4 material FLOAT,',
+                    f'core radius FLOAT, s1 thickness FLOAT, s2 thickness FLOAT, s3 thickness FLOAT, s4 thickness FLOAT)')
+        cur.execute(f'CREATE TABLE IF NOT EXISTS target (target id INT)') ### target values
+        cur.execute(f'CREATE TABLE IF NOT EXISTS spectrum (design id INT)')
+        cur.execute(f'CREATE TAVLE IF NOT EXISTS optimization (design id INT, mae FLOAT)')
+        con.commit()
+        if not ids:
+            ids = range(self.num_sols)
+        for i in ids:
+            exec_string = ''
+            for k in range(5):
+                if k < len(self.params[i])//2:
+                    exec_string += ', ' + str(self.params[i][k]) + ', ' + str(self.params[i][k+len(self.params[i]//2)])
+                else:
+                    exec_string += ', NULL, NULL'
+            cur.execute(f'INSERT INTO designs VALUES ({i}, {exec_string[2:]})')
+            cur.execute(f'INSERT INTO optimization VALUES ({i}, {self.MAES[i]})')
+            ### missing target and spectrum.
+        con.close()
