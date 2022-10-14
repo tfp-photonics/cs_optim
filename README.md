@@ -1,6 +1,6 @@
 # CSOptim
 
-![CSOptim Figure 1](https://git.scc.kit.edu/ir5978/cs_optimization/-/blob/main/figures/core_shell_model.pdf?raw=True)
+![CSOptim Figure 1](https://git.scc.kit.edu/ir5978/cs_optimization/-/blob/main/figures/test_sphere_model.png?raw=True)
 
 Gradient-based optimization of core-shell particles with distinct material classes. For detailed information please check the [article]()
 
