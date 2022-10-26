@@ -16,9 +16,9 @@ conda activate cs_optim
 
 ## Run Optimization
 
-You can run an Optimization with the `main.py` file. The code includes the generation of target spectra of bare core and core-single-shell particles with [PyMieScatt](https://pymiescatt.readthedocs.io/en/latest/). To target single or mutliple frequencies add pass them as `-enhancement` and add linewidths with `-width`.
+You can run an Optimization with the `main.py` file. The code includes the generation of target spectra of bare core and core-single-shell particles with [PyMieScatt](https://pymiescatt.readthedocs.io/en/latest/). To target single or mutliple frequencies add pass them as `-enhancement` and add linewidths with `-width`. 
 
 ## Models and Training
 
-The trained models can be found [here](models/saved_models/). To start your own training, use `main_train.py` with your prefered parameters. You may generate your own training data using PyMieScat or ... something about our data that I still have to upload ...
+The trained models can be found [here](models/saved_models/). To start your own training, use `main_train.py` with your prefered parameters. You may generate your own training data using PyMieScat. The original training data used for the models is available [here]().
 
