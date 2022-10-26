@@ -159,38 +159,38 @@ class Results:  ## store results
         dann bräuchte man aber sowas wie target id und design id. 
     """
 
-    def save_to_db(self, name="db", ids=None):
-        raise NotImplementedError
+    # def save_to_db(self, name="db", ids=None):
+    #     raise NotImplementedError
 
-        con = sqlite3.connect(f"{name}.sqlite")
-        cur = con.cursor()
-        cur.execute(
-            f"CREATE TABLE IF NOT EXISTS designs (design id INT, core material FLOAT, s1 material FLOAT, s2 material FLOAT, s3 material FLOAT,  s4 material FLOAT,",
-            f"core radius FLOAT, s1 thickness FLOAT, s2 thickness FLOAT, s3 thickness FLOAT, s4 thickness FLOAT)",
-        )
-        cur.execute(
-            f"CREATE TABLE IF NOT EXISTS target (target id INT)"
-        )  ### target values
-        cur.execute(f"CREATE TABLE IF NOT EXISTS spectrum (design id INT)")
-        cur.execute(
-            f"CREATE TAVLE IF NOT EXISTS optimization (design id INT, mae FLOAT)"
-        )
-        con.commit()
-        if not ids:
-            ids = range(self.num_sols)
-        for i in ids:
-            exec_string = ""
-            for k in range(5):
-                if k < len(self.params[i]) // 2:
-                    exec_string += (
-                        ", "
-                        + str(self.params[i][k])
-                        + ", "
-                        + str(self.params[i][k + len(self.params[i] // 2)])
-                    )
-                else:
-                    exec_string += ", NULL, NULL"
-            cur.execute(f"INSERT INTO designs VALUES ({i}, {exec_string[2:]})")
-            cur.execute(f"INSERT INTO optimization VALUES ({i}, {self.MAES[i]})")
-            ### missing target and spectrum.
-        con.close()
+    #     con = sqlite3.connect(f"{name}.sqlite")
+    #     cur = con.cursor()
+    #     cur.execute(
+    #         f"CREATE TABLE IF NOT EXISTS designs (design id INT, core material FLOAT, s1 material FLOAT, s2 material FLOAT, s3 material FLOAT,  s4 material FLOAT,",
+    #         f"core radius FLOAT, s1 thickness FLOAT, s2 thickness FLOAT, s3 thickness FLOAT, s4 thickness FLOAT)",
+    #     )
+    #     cur.execute(
+    #         f"CREATE TABLE IF NOT EXISTS target (target id INT)"
+    #     )  ### target values
+    #     cur.execute(f"CREATE TABLE IF NOT EXISTS spectrum (design id INT)")
+    #     cur.execute(
+    #         f"CREATE TAVLE IF NOT EXISTS optimization (design id INT, mae FLOAT)"
+    #     )
+    #     con.commit()
+    #     if not ids:
+    #         ids = range(self.num_sols)
+    #     for i in ids:
+    #         exec_string = ""
+    #         for k in range(5):
+    #             if k < len(self.params[i]) // 2:
+    #                 exec_string += (
+    #                     ", "
+    #                     + str(self.params[i][k])
+    #                     + ", "
+    #                     + str(self.params[i][k + len(self.params[i] // 2)])
+    #                 )
+    #             else:
+    #                 exec_string += ", NULL, NULL"
+    #         cur.execute(f"INSERT INTO designs VALUES ({i}, {exec_string[2:]})")
+    #         cur.execute(f"INSERT INTO optimization VALUES ({i}, {self.MAES[i]})")
+    #         ### missing target and spectrum.
+    #     con.close()
