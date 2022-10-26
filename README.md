@@ -1,6 +1,6 @@
 # CSOptim
 
-![CSOptim Figure 1](https://git.scc.kit.edu/photonics/open-source/cs_optimization/-/tree/main/figures/test_sphere_model.png)
+![CSOptim Figure 1](figures/test_sphere_model.png)
 
 Gradient-based optimization of core-shell particles with distinct material classes. For detailed information please check the [article]()
 
