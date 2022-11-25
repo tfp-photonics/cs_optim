@@ -2,7 +2,7 @@
 
 ![CSOptim Figure 1](figures/paper_figure.png)
 
-Gradient-based optimization of core-shell particles with distinct material classes. For detailed information please check the [article]()
+Gradient-based optimization of core-shell particles with distinct material classes. For detailed information please check the [article](https://www.nature.com/articles/s41598-022-21802-3)
 
 
 ## Requirements
